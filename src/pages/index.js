@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import SearchBar from '../components/index/SearchBar'
 import styles from '../styles/index.module.css'
-import RegisterForm from "../components/index/RegisterForm";
 
 export default function Home() {
   return (

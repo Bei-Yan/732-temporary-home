@@ -1,23 +1,35 @@
 import {useState} from 'react';
 
-function RegisterForm(){
+
+export default function registerForm(){
 
     const [form, setForm] = useState({
-        userName:"",
+        name:"",
         password:"",
         email:""
     })
 
-    function register(){
-        console.log("Register Start")
+    async function submitHandler(e) {
+        e.preventDefault();
+
+        const postData = async () =>{
+            const response = await fetch("/api/register", {
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)});
+            return response.json()
+        }
+        postData().then((data) => alert(data.message))
     }
 
     return (
-        <form onSubmit={register}>
+        <form onSubmit={submitHandler}>
             <label>Username: <input onChange={e => {
                 setForm({
                     ...form,
-                    userName: e.target.value
+                    name: e.target.value
                 })
             }}/>
             </label>
@@ -43,5 +55,3 @@ function RegisterForm(){
         </form>
     );
 }
-
-export default RegisterForm;
